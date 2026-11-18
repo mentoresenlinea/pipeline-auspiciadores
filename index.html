@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pipeline de Patrocinios 2027</title>
+  <!-- Conexión 1: el diseño -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>Pipeline de Patrocinios 2027</h1>
+      <p>Mentores en Línea — colaboraciones con marcas</p>
+    </div>
+    <!-- El botón tiene un "id": un nombre ÚNICO para que JavaScript lo encuentre -->
+    <button id="boton-nueva" class="boton-principal">+ Nueva marca</button>
+  </header>
+
+  <!-- Resumen de follow-ups: JavaScript escribe aquí -->
+  <div id="resumen" class="resumen"></div>
+
+  <!-- Ventana emergente con el formulario. Empieza escondida. -->
+  <dialog id="ventana-nueva">
+    <form id="formulario-nueva">
+      <!-- El título cambia según si estás creando o editando -->
+      <h2 id="titulo-ventana">Nueva marca</h2>
+
+      <label>Marca
+        <input name="nombre" required placeholder="Ej. Banco Popular">
+      </label>
+
+      <label>Contacto
+        <input name="contacto" required placeholder="Nombre de la persona">
+      </label>
+
+      <label>Etapa
+        <select name="etapa">
+          <option value="enviado">Enviado</option>
+          <option value="respondio">Respondió</option>
+          <option value="reunion">Reunión</option>
+          <option value="propuesta">Propuesta</option>
+          <option value="cerrado">Cerrado</option>
+          <option value="perdido">Perdido / No interesado</option>
+        </select>
+      </label>
+
+      <label>Nota (opcional)
+        <textarea name="nota" rows="2" placeholder="¿Qué pasó en el último contacto?"></textarea>
+      </label>
+
+      <label>Último contacto
+        <input name="ultimoContacto" type="date" required>
+      </label>
+
+      <div class="botones">
+        <!-- Solo se ve cuando estás editando una marca existente -->
+        <button type="button" id="boton-borrar" class="boton-borrar">Borrar</button>
+        <button type="button" id="boton-cancelar">Cancelar</button>
+        <button type="submit" class="boton-principal">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Las columnas ahora están VACÍAS.
+       JavaScript las llena leyendo la lista de marcas en app.js.
+       "data-etapa" es la etiqueta que JavaScript usa para saber qué columna es cuál. -->
+  <main class="tablero">
+    <section class="columna" data-etapa="enviado">
+      <h2>Enviado <span class="contador"></span></h2>
+    </section>
+    <section class="columna" data-etapa="respondio">
+      <h2>Respondió <span class="contador"></span></h2>
+    </section>
+    <section class="columna" data-etapa="reunion">
+      <h2>Reunión <span class="contador"></span></h2>
+    </section>
+    <section class="columna" data-etapa="propuesta">
+      <h2>Propuesta <span class="contador"></span></h2>
+    </section>
+    <section class="columna" data-etapa="cerrado">
+      <h2>Cerrado <span class="contador"></span></h2>
+    </section>
+    <section class="columna perdido" data-etapa="perdido">
+      <h2>Perdido / No interesado <span class="contador"></span></h2>
+    </section>
+  </main>
+
+  <!-- Conexión 2: el comportamiento. Va al final para que
+       el HTML de arriba ya exista cuando el código corra. -->
+  <script src="app.js"></script>
+</body>
+</html>

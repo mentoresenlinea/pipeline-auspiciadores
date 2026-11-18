@@ -1,0 +1,210 @@
+/* ============================================
+   styles.css — cómo se ve el pipeline
+   Cada bloque dice: "a ESTO, aplícale ESTAS reglas"
+   ============================================ */
+
+/* Regla global: el "width" de una caja INCLUYE su relleno (padding).
+   Sin esto, 230px de ancho + 12px de relleno por lado = 254px reales. */
+* {
+  box-sizing: border-box;
+}
+
+/* Toda la página */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;  /* la letra del sistema: limpia y rápida */
+  background: #f4f4f1;                 /* gris clarito de fondo */
+  color: #1f1f1f;
+}
+
+/* Encabezado de arriba: título a la izquierda, botón a la derecha */
+header {
+  padding: 24px 32px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+header h1 {
+  margin: 0;
+  font-size: 26px;
+}
+header p {
+  margin: 4px 0 0;
+  color: #6b6b6b;
+}
+
+/* EL TRUCO PRINCIPAL: poner las columnas lado a lado.
+   "display: flex" convierte a sus hijos (las columnas) en una fila. */
+.tablero {
+  display: flex;
+  gap: 16px;              /* espacio entre columnas */
+  padding: 16px 32px 32px;
+  overflow-x: auto;       /* si no caben, se puede deslizar de lado */
+  align-items: flex-start;
+}
+
+/* Cada columna */
+.columna {
+  background: #e8e8e3;
+  border-radius: 12px;
+  padding: 12px;
+  min-width: 230px;       /* ancho fijo para que no se aplasten */
+  width: 230px;
+  flex-shrink: 0;
+}
+.columna h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #555;
+  margin: 4px 4px 12px;
+}
+
+/* El numerito al lado del título de la columna */
+.contador {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 1px 8px;
+  margin-left: 4px;
+  font-size: 12px;
+}
+
+/* Cada tarjeta (una marca) */
+.tarjeta {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);   /* sombra sutil */
+}
+.tarjeta h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+.tarjeta p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #444;
+}
+
+/* La línea de fecha se ve más pequeña y gris */
+.tarjeta .fecha {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #888;
+}
+
+/* La columna de "Perdido" con un tono rojizo para diferenciarla */
+.columna.perdido {
+  background: #f3e3e1;
+}
+
+/* ---------- Botones ---------- */
+button {
+  font: inherit;
+  font-size: 14px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;          /* la manito al pasar el mouse */
+}
+.boton-principal {
+  background: #1f1f1f;
+  color: white;
+  border-color: #1f1f1f;
+  font-weight: 600;
+}
+.boton-principal:hover {    /* ":hover" = cuando el mouse está encima */
+  background: #3a3a3a;
+}
+
+/* ---------- La ventana del formulario ---------- */
+dialog {
+  border: none;
+  border-radius: 14px;
+  padding: 24px;
+  width: min(420px, 92vw);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+dialog::backdrop {          /* el fondo oscuro detrás de la ventana */
+  background: rgba(0, 0, 0, 0.35);
+}
+dialog h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+}
+label {
+  display: block;           /* cada campo en su propia línea */
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 12px;
+}
+input, select, textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: normal;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+/* ---------- Paso 5: tarjetas clickeables y botón de borrar ---------- */
+.tarjeta {
+  cursor: pointer;
+  transition: box-shadow 0.15s, transform 0.15s;   /* animación suave */
+}
+.tarjeta:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);                      /* se "levanta" un poquito */
+}
+.boton-borrar {
+  color: #b3261e;
+  border-color: #e6b8b4;
+  margin-right: auto;    /* lo empuja a la izquierda, lejos de "Guardar" */
+}
+.boton-borrar:hover {
+  background: #fbeeed;
+}
+
+/* ---------- Paso 6: alertas de follow-up ---------- */
+
+/* Barra de resumen arriba del tablero */
+.resumen {
+  margin: 8px 32px 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.resumen.pendiente {
+  background: #fff4dc;
+  color: #7a5200;
+  border: 1px solid #f0d9a0;
+}
+.resumen.al-dia {
+  background: #e6f4ea;
+  color: #1e6b34;
+  border: 1px solid #b9dfc4;
+}
+
+/* Tarjeta que necesita follow-up: borde naranja a la izquierda */
+.tarjeta.alerta {
+  border-left: 4px solid #e8a317;
+}
+.tarjeta .aviso {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9a6700;
+}

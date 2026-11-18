@@ -1,0 +1,3 @@
+# Archivos que Git debe IGNORAR (no subirlos a GitHub).
+# Las capturas fueron para la clase, no son parte de la app.
+*.png
